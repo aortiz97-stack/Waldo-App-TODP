@@ -5,7 +5,7 @@ import wizard from '../images/wizard-white-beard.png';
 import woof from '../images/woof.png';
 import {useEffect} from 'react';
 
-const HomePage = () => {
+const HomePage = ({setHasStarted}) => {
     useEffect(() => {
         const startButton = document.querySelector('button#start');
         const homePage = document.querySelector('#home-page');
@@ -14,6 +14,8 @@ const HomePage = () => {
         startButton.addEventListener('click', () => {
             homePage.style.display = "none";
             mainGame.style.display = "flex";
+            setHasStarted('true');
+
         });
     },
     [])

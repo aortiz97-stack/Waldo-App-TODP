@@ -121,8 +121,11 @@ img {
 }
 
 #waldo-game-img {
-  /*margin: 5px;*/
   object-fit: contain;
   width: 100%;
   height: 100%;
+}
+
+#waldo-game-img:hover {
+  cursor: pointer;
 }
