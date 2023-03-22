@@ -23,7 +23,7 @@ const HomePage = ({setHasStarted}) => {
       <div id="home-page" style={{display: 'flex'}}>
         <div id="home-text">
             <h1>Where's Waldo?</h1>
-            <p>See if you can find all of the characters in time!</p>
+            <p>See if you can find all of the characters as quickly as possible!</p>
         </div>
         <div id="profile-images">
             <div className="profile">

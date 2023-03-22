@@ -1,8 +1,3 @@
-import waldo from '../images/waldo-profile.png';
-import odlaw from '../images/odlaw.png';
-import wenda from '../images/wenda.png';
-import wizard from '../images/wizard-white-beard.png';
-import woof from '../images/woof.png';
 import wheresWaldo from '../images/wheres-waldo.jpeg';
 import allCharacters from '../images/all-characters.png';
 import {useEffect, useState} from 'react';
@@ -51,9 +46,19 @@ const MainGame = ({hasStarted}) => {
         formatTime();
     };
 
+
     useEffect(() => {
         const mainGame = document.querySelector("#main-game");
-        mainGame.addEventListener('click', () => {
+        const gameBody = document.querySelector('#game-body');
+        mainGame.addEventListener('click', (e) => {
+          if (e.target.id === 'waldo-game-img') {
+            const characterMenu = document.createElement('div');
+            characterMenu.id = 'character-menu';
+            characterMenu.innerHTML = "tHIS IS A MENU";
+            characterMenu.style.left = `${e.clientX}px`;
+            characterMenu.style.top = `${e.clientY}px`;
+            mainGame.appendChild(characterMenu);
+          }
         });
     },
     []);
@@ -68,7 +73,7 @@ const MainGame = ({hasStarted}) => {
         <div id="main-game" style={{display: 'none'}}>
             <div id="header">
                 <div id="header-profile-images">
-                    <img src={allCharacters}/>
+                    <img src={allCharacters} alt="profile pictures of Waldo, Woof, Wenda, Wizard, and Odlaw in that order"/>
                 </div>
                 <div id="timer"><h1>{formattedHour}:{formattedMinute}:{formattedSecond}</h1></div>
                 <div id="counter-left"><h2>Characters Left: 5</h2></div>
