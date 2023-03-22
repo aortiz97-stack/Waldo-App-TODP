@@ -132,4 +132,20 @@ img {
 
 #character-menu {
   position: absolute;
+  background-color: gray;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: black;
 }

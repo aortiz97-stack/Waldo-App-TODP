@@ -58,11 +58,19 @@ const MainGame = ({hasStarted}) => {
             }
             const characterMenu = document.createElement('div');
             characterMenu.id = 'character-menu';
-            characterMenu.innerHTML = "tHIS IS A MENU";
+
+            const names = ['Waldo', 'Woof', 'Wenda', 'Wizard', 'Odlaw'];
+            for (let i = 0; i < names.length; i += 1) {
+                const a = document.createElement('a');
+                a.href = '#'
+                a.innerHTML = names[i];
+                characterMenu.appendChild(a);
+            }
+
             characterMenu.style.left = `${e.clientX}px`;
             characterMenu.style.top = `${e.clientY}px`;
             mainGame.appendChild(characterMenu);
-          } else if (potentialCharacterMenu !== null) {
+          } else if (potentialCharacterMenu !== null && e.target.id !== '') {
             mainGame.removeChild(potentialCharacterMenu);
           }
         });
