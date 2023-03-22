@@ -1,3 +1,12 @@
+@font-face {
+  font-family: Optima-Extra-Black;
+  src: url("./fonts/Optima-ExtraBlack.otf");
+}
+
+* {
+  font-family: Optima-Extra-Black, sans-serif;
+}
+
 body {
   height: 100vh;
   width: 100vw;
@@ -13,6 +22,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #89CFF0;
+  width: 100%;
 }
 
 #home-page {
@@ -33,6 +44,15 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  background-color: #ff4040;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  padding: 15px;
+}
+
+#home-button-container button {
+  width: 100px;
 }
 
 
@@ -65,12 +85,13 @@ img {
 }
 
 #header {
-  height: 15%;
+  height: 20%;
   width: 100%;
-  background-color: red;
+  background-color: #ff4040;
+  display: flex;
 }
 
 #game-body {
-  height: 85%;
+  height: 80%;
   width: 100%;
 }
