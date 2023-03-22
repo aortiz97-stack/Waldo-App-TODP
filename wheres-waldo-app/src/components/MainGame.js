@@ -51,13 +51,19 @@ const MainGame = ({hasStarted}) => {
         const mainGame = document.querySelector("#main-game");
         const gameBody = document.querySelector('#game-body');
         mainGame.addEventListener('click', (e) => {
+          const potentialCharacterMenu = document.querySelector('#character-menu');
           if (e.target.id === 'waldo-game-img') {
+            if (potentialCharacterMenu !== null) {
+                mainGame.removeChild(potentialCharacterMenu);
+            }
             const characterMenu = document.createElement('div');
             characterMenu.id = 'character-menu';
             characterMenu.innerHTML = "tHIS IS A MENU";
             characterMenu.style.left = `${e.clientX}px`;
             characterMenu.style.top = `${e.clientY}px`;
             mainGame.appendChild(characterMenu);
+          } else if (potentialCharacterMenu !== null) {
+            mainGame.removeChild(potentialCharacterMenu);
           }
         });
     },
