@@ -9,14 +9,16 @@ const HomePage = () => {
     useEffect(() => {
         const startButton = document.querySelector('button#start');
         const homePage = document.querySelector('#home-page');
+        const mainGame = document.querySelector('#main-game');
 
         startButton.addEventListener('click', () => {
-
+            homePage.style.display = "none";
+            mainGame.style.display = "flex";
         });
     },
     [])
     return (
-      <div id="home-page">
+      <div id="home-page" style={{display: 'flex'}}>
         <div id="home-text">
             <h1>Where's Waldo?</h1>
             <p>See if you can find all of the characters in time!</p>
