@@ -7,6 +7,7 @@ import {useEffect} from 'react';
 
 const HomePage = ({setHasStarted}) => {
     useEffect(() => {
+        const img = document.querySelector('#waldo-game-img');
         const startButton = document.querySelector('button#start');
         const homePage = document.querySelector('#home-page');
         const mainGame = document.querySelector('#main-game');
@@ -15,10 +16,9 @@ const HomePage = ({setHasStarted}) => {
             homePage.style.display = "none";
             mainGame.style.display = "flex";
             setHasStarted('true');
-
         });
     },
-    [])
+    []);
     return (
       <div id="home-page" style={{display: 'flex'}}>
         <div id="home-text">
@@ -44,7 +44,7 @@ const HomePage = ({setHasStarted}) => {
             </div>
             <div className="profile">
                 <div className="profile-image-container"><img src={woof} alt="Woof the dog" /></div>
-                <p>Woof</p>
+                <p>Woof (only his tail appears!)</p>
             </div>
         </div>
         <div id="home-button-container">

@@ -1,7 +1,6 @@
-import wheresWaldo from '../images/wheres-waldo.jpeg';
+import gobblingGluttons from '../images/gobblinggluttons.jpeg';
 import allCharacters from '../images/all-characters.png';
 import {useEffect, useState} from 'react';
-
 
 const MainGame = ({hasStarted}) => {
     const [hour, setHour] = useState(0);
@@ -46,13 +45,14 @@ const MainGame = ({hasStarted}) => {
         formatTime();
     };
 
-
     useEffect(() => {
         const mainGame = document.querySelector("#main-game");
-        const gameBody = document.querySelector('#game-body');
         mainGame.addEventListener('click', (e) => {
           const potentialCharacterMenu = document.querySelector('#character-menu');
-          if (e.target.id === 'waldo-game-img') {
+          if (e.target.id === 'waldo-game-img' || e.target.className==="character-button") {
+            if (e.target.className==='character-button') {
+                alert('it worked!');
+            }
             if (potentialCharacterMenu !== null) {
                 mainGame.removeChild(potentialCharacterMenu);
             }
@@ -69,19 +69,20 @@ const MainGame = ({hasStarted}) => {
 
             characterMenu.style.left = `${e.clientX}px`;
             characterMenu.style.top = `${e.clientY}px`;
+            console.log(`left ${e.clientX}`);
+            console.log(`right ${e.clientY}`);
             mainGame.appendChild(characterMenu);
           } else if (potentialCharacterMenu !== null && e.target.id !== '') {
             mainGame.removeChild(potentialCharacterMenu);
           }
         });
-    },
-    []);
+    }, []);
 
     useEffect(() => {
         if (hasStarted) {
             setTimeout(incrementTime, 1000);
         }
-    }, [hour, minute, second, hasStarted])
+    }, [hour, minute, second, hasStarted]);
 
     return (
         <div id="main-game" style={{display: 'none'}}>
@@ -93,7 +94,12 @@ const MainGame = ({hasStarted}) => {
                 <div id="counter-left"><h2>Characters Left: 5</h2></div>
             </div>
             <div id="game-body">
-                <img src={wheresWaldo} alt="where's waldo scene" id="waldo-game-img"/>
+                <img src={gobblingGluttons} alt="where's waldo scene" id="waldo-game-img"/>
+                <button id="odlaw-button" className="character-button"></button>
+                <button id="waldo-button" className="character-button"></button>
+                <button id="wenda-button" className="character-button"></button>
+                <button id="wizard-button" className="character-button"></button>
+                <button id="woof-button" className="character-button"></button>
             </div>
         </div>
     );
