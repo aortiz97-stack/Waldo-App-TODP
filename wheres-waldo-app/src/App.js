@@ -12,12 +12,6 @@ const App = () => {
   const [finalMinute, setFinalMinute] = useState(0);
   const [finalSecond, setFinalSecond] = useState(0);
 
-  useEffect(()=>{
-    console.log(`final hour ${finalHour}`)
-    console.log(`final minute ${finalMinute}`);
-    console.log(`final second ${finalSecond}` )
-  }, [finalHour, finalMinute, finalSecond])
-
 
 
   return (

@@ -10,7 +10,6 @@ const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHou
     const [formattedMinute, setFormattedMinute] = useState('00');
     const [formattedSecond, setFormattedSecond] = useState('00');
     let alreadyClicked = useRef([]);
-    //let ended = useRef(false);
 
     const formatTime = () => {
         if ((second+1) % 60 < 10) {
@@ -117,12 +116,7 @@ const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHou
             if (alreadyClicked.current.length < 5) {
                 mainGame.appendChild(characterMenu);
                 characterMenu.addEventListener('click', (e2) => handleChoiceClick(e, e2));
-            } /*else {
-                //localHasStarted.current = false;
-                console.log(`it enterred`);
-                setHasStarted(false);
-                setHasEnded(true);
-            }*/
+            }
           } else if (potentialCharacterMenu !== null && e.target.id !== '') {
             potentialCharacterMenu.removeEventListener('click', (e2) => handleChoiceClick(e, e2));
             mainGame.removeChild(potentialCharacterMenu);
@@ -132,8 +126,6 @@ const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHou
 
     useEffect(()=>{
         if (alreadyClicked.current.length >= 5) {
-            //localHasStarted.current = false;
-            console.log(`it enterred`);
             setHasStarted(false);
             setHasEnded(true);
             setFinalHour(hour);
@@ -142,17 +134,18 @@ const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHou
         }
     });
 
-    /*useEffect(() => {
-        if (hasStarted) {
-            localHasStarted.current = true;
-        }
-    }, [hasStarted]);*/
-
     useEffect(() => {
         if (hasStarted && !hasEnded) {
             setTimeout(incrementTime, 1000);
         }
     }, [hour, minute, second, hasStarted, hasEnded]);
+
+    useEffect(() => {
+        const mainGame = document.querySelector('#main-game');
+        const scoreBoardMenu = document.querySelector('#scoreboard-menu');
+        mainGame.style.display = {display: 'none'};
+        scoreBoardMenu.style.display = {display: 'flex'};
+    }, [hasEnded]);
 
     return (
         <div id="main-game" style={{display: 'none'}}>
@@ -161,7 +154,7 @@ const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHou
                     <img src={allCharacters} alt="profile pictures of Waldo, Woof, Wenda, Wizard, and Odlaw in that order"/>
                 </div>
                 <div id="timer"><h1>{formattedHour}:{formattedMinute}:{formattedSecond}</h1></div>
-                <div id="counter-left"><h2>Characters Left: 5</h2></div>
+                <div id="counter-left"><h2>Characters Left: {5-alreadyClicked.current.length}</h2></div>
             </div>
             <div id="game-body">
                 <img src={gobblingGluttons} alt="where's waldo scene" id="waldo-game-img"/>
