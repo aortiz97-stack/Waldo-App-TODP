@@ -7,7 +7,6 @@ import {useEffect} from 'react';
 
 const HomePage = ({setHasStarted}) => {
     useEffect(() => {
-        const img = document.querySelector('#waldo-game-img');
         const startButton = document.querySelector('button#start');
         const homePage = document.querySelector('#home-page');
         const mainGame = document.querySelector('#main-game');
@@ -19,6 +18,7 @@ const HomePage = ({setHasStarted}) => {
         });
     },
     []);
+    
     return (
       <div id="home-page" style={{display: 'flex'}}>
         <div id="home-text">

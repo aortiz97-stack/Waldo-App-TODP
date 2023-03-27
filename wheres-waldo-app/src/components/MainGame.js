@@ -2,7 +2,7 @@ import gobblingGluttons from '../images/gobblinggluttons.jpeg';
 import allCharacters from '../images/all-characters.png';
 import {useEffect, useState, useRef} from 'react';
 
-const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded}) => {
+const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHour, setFinalMinute, setFinalSecond}) => {
     const [hour, setHour] = useState(0);
     const [minute, setMinute] = useState(0);
     const [second, setSecond] = useState(0);
@@ -117,18 +117,30 @@ const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded}) => {
             if (alreadyClicked.current.length < 5) {
                 mainGame.appendChild(characterMenu);
                 characterMenu.addEventListener('click', (e2) => handleChoiceClick(e, e2));
-            } else {
+            } /*else {
                 //localHasStarted.current = false;
                 console.log(`it enterred`);
                 setHasStarted(false);
                 setHasEnded(true);
-            }
+            }*/
           } else if (potentialCharacterMenu !== null && e.target.id !== '') {
             potentialCharacterMenu.removeEventListener('click', (e2) => handleChoiceClick(e, e2));
             mainGame.removeChild(potentialCharacterMenu);
           }
         });
     }, []);
+
+    useEffect(()=>{
+        if (alreadyClicked.current.length >= 5) {
+            //localHasStarted.current = false;
+            console.log(`it enterred`);
+            setHasStarted(false);
+            setHasEnded(true);
+            setFinalHour(hour);
+            setFinalMinute(minute);
+            setFinalSecond(second);     
+        }
+    });
 
     /*useEffect(() => {
         if (hasStarted) {
