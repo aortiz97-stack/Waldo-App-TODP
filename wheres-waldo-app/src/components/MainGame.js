@@ -128,9 +128,9 @@ const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHou
         if (alreadyClicked.current.length >= 5) {
             setHasStarted(false);
             setHasEnded(true);
-            setFinalHour(hour);
-            setFinalMinute(minute);
-            setFinalSecond(second);     
+            setFinalHour(formattedHour);
+            setFinalMinute(formattedMinute);
+            setFinalSecond(formattedSecond);     
         }
     });
 
@@ -141,11 +141,14 @@ const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHou
     }, [hour, minute, second, hasStarted, hasEnded]);
 
     useEffect(() => {
-        const mainGame = document.querySelector('#main-game');
-        const scoreBoardMenu = document.querySelector('#scoreboard-menu');
-        mainGame.style.display = {display: 'none'};
-        scoreBoardMenu.style.display = {display: 'flex'};
-    }, [hasEnded]);
+        console.log(`hasEnded: ${hasEnded}`);
+        if (hasEnded) {
+            const mainGame = document.querySelector('#main-game');
+            const scoreBoardMenuContainer = document.querySelector('#scoreboard-menu-container');
+            mainGame.style.display = 'none';
+            scoreBoardMenuContainer.style.display = 'flex';
+        }
+    });
 
     return (
         <div id="main-game" style={{display: 'none'}}>
