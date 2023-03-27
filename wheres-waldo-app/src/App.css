@@ -121,6 +121,12 @@ img {
   align-items: center;
 }
 
+#timer {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 #waldo-game-img {
   /*object-fit: contain;*/
   width: 100%;
@@ -151,7 +157,7 @@ a:visited {
   color: black;
 }
 
-#odlaw-button {
+#Odlaw-button {
   position: absolute;
   /*left: 318px;
   top: 610px;
@@ -166,7 +172,7 @@ a:visited {
   background-color: cyan;
 }
 
-#waldo-button {
+#Waldo-button {
   position: absolute;
   width: 2%;
   height: 7%;
@@ -177,7 +183,7 @@ a:visited {
   background-color: violet;
 }
 
-#wenda-button {
+#Wenda-button {
   position: absolute;
   width: 0.59%;
   height: 5%;
@@ -188,7 +194,7 @@ a:visited {
   background-color: red;
 }
 
-#wizard-button {
+#Wizard-button {
   position: absolute;
   width: 4%;
   height: 12%;
@@ -199,7 +205,7 @@ a:visited {
   background-color: greenyellow;
 }
 
-#woof-button {
+#Woof-button {
   position: absolute;
   width: 3%;
   height: 2%;
@@ -221,4 +227,16 @@ a:visited {
 
 #main-game:hover {
   cursor: pointer;
+}
+
+.fade-in-text {
+  text-align: center;
+  animation: fadeIn 5s;
+  color: white;
+  background-color: #ff4040;
+}
+
+.fade-in-text.failure {
+  /*left: 48.5%;
+  top: 10%;*/
 }

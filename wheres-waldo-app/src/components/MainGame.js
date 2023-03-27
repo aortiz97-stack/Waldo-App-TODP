@@ -1,6 +1,6 @@
 import gobblingGluttons from '../images/gobblinggluttons.jpeg';
 import allCharacters from '../images/all-characters.png';
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useRef} from 'react';
 
 const MainGame = ({hasStarted}) => {
     const [hour, setHour] = useState(0);
@@ -9,6 +9,7 @@ const MainGame = ({hasStarted}) => {
     const [formattedHour, setFormattedHour] = useState('00');
     const [formattedMinute, setFormattedMinute] = useState('00');
     const [formattedSecond, setFormattedSecond] = useState('00');
+    let alreadyClicked = useRef([]);
 
     const formatTime = () => {
         if ((second+1) % 60 < 10) {
@@ -46,14 +47,55 @@ const MainGame = ({hasStarted}) => {
     };
 
     useEffect(() => {
+        const handleSuccessfulChoiceClickHelper = (name) => {
+            let foundMessage = 'Congratulations! You found character!';
+            const timer = document.querySelector('#timer');
+            alreadyClicked.current = (alreadyClicked.current.concat([name]));
+            foundMessage = foundMessage.replace('character', name);
+            const gameMessage = document.createElement('div');
+            gameMessage.classList.add('fade-in-text');
+            gameMessage.innerHTML = foundMessage;
+            timer.appendChild(gameMessage);
+            setTimeout(() => timer.removeChild(gameMessage), 5000);
+        };
+        const handleFailureChoiceClickHelper = () => {
+            const message = 'Try again';
+            const timer = document.querySelector('#timer');
+            const gameMessage = document.createElement('div');
+            gameMessage.classList.add('fade-in-text');
+            gameMessage.classList.add('failure')
+            gameMessage.innerHTML = message;
+            timer.appendChild(gameMessage);
+            setTimeout(() => timer.removeChild(gameMessage), 5000);
+        };
+    
+        const handleChoiceClick = (e1, e2) => {
+            if (e1.target.className === 'character-button') {
+                if (e1.target.id === 'Odlaw-button' && e2.target.id === 'Odlaw-choice') {
+                    handleSuccessfulChoiceClickHelper('Odlaw');
+                } else if (e1.target.id === 'Waldo-button' && e2.target.id === 'Waldo-choice') {
+                    handleSuccessfulChoiceClickHelper('Waldo');  
+                } else if (e1.target.id === 'Wenda-button' && e2.target.id === 'Wenda-choice') {
+                    handleSuccessfulChoiceClickHelper('Wenda');
+                } else if (e1.target.id === 'Wizard-button' && e2.target.id === 'Wizard-choice') {
+                    handleSuccessfulChoiceClickHelper('Wizard');
+                } else if (e1.target.id === 'Woof-button' && e2.target.id === 'Woof-choice') {
+                    handleSuccessfulChoiceClickHelper('Woof');
+                } else  {
+                    handleFailureChoiceClickHelper();
+                }
+            }
+            else {
+                handleFailureChoiceClickHelper(); 
+            }
+        };
+
         const mainGame = document.querySelector("#main-game");
         mainGame.addEventListener('click', (e) => {
           const potentialCharacterMenu = document.querySelector('#character-menu');
-          if (e.target.id === 'waldo-game-img' || e.target.className==="character-button") {
-            if (e.target.className==='character-button') {
-                alert('it worked!');
-            }
+          if (e.target.id === 'waldo-game-img' || e.target.className === "character-button") {
             if (potentialCharacterMenu !== null) {
+                potentialCharacterMenu.removeEventListener('click', (e2) => handleChoiceClick(e, e2));
                 mainGame.removeChild(potentialCharacterMenu);
             }
             const characterMenu = document.createElement('div');
@@ -61,18 +103,22 @@ const MainGame = ({hasStarted}) => {
 
             const names = ['Waldo', 'Woof', 'Wenda', 'Wizard', 'Odlaw'];
             for (let i = 0; i < names.length; i += 1) {
-                const a = document.createElement('a');
-                a.href = '#'
-                a.innerHTML = names[i];
-                characterMenu.appendChild(a);
+                if (!alreadyClicked.current.includes(names[i])) {
+                    const a = document.createElement('a');
+                    a.href = '#'
+                    a.innerHTML = names[i];
+                    a.id = `${names[i]}-choice`;
+                    characterMenu.appendChild(a);
+                }
             }
-
             characterMenu.style.left = `${e.clientX}px`;
             characterMenu.style.top = `${e.clientY}px`;
-            console.log(`left ${e.clientX}`);
-            console.log(`right ${e.clientY}`);
-            mainGame.appendChild(characterMenu);
+            if (alreadyClicked.current.length < 5) {
+                mainGame.appendChild(characterMenu);
+                characterMenu.addEventListener('click', (e2) => handleChoiceClick(e, e2));
+            }
           } else if (potentialCharacterMenu !== null && e.target.id !== '') {
+            potentialCharacterMenu.removeEventListener('click', (e2) => handleChoiceClick(e, e2));
             mainGame.removeChild(potentialCharacterMenu);
           }
         });
@@ -95,11 +141,11 @@ const MainGame = ({hasStarted}) => {
             </div>
             <div id="game-body">
                 <img src={gobblingGluttons} alt="where's waldo scene" id="waldo-game-img"/>
-                <button id="odlaw-button" className="character-button"></button>
-                <button id="waldo-button" className="character-button"></button>
-                <button id="wenda-button" className="character-button"></button>
-                <button id="wizard-button" className="character-button"></button>
-                <button id="woof-button" className="character-button"></button>
+                <button id="Odlaw-button" className="character-button"></button>
+                <button id="Waldo-button" className="character-button"></button>
+                <button id="Wenda-button" className="character-button"></button>
+                <button id="Wizard-button" className="character-button"></button>
+                <button id="Woof-button" className="character-button"></button>
             </div>
         </div>
     );
