@@ -2,7 +2,7 @@ import gobblingGluttons from '../images/gobblinggluttons.jpeg';
 import allCharacters from '../images/all-characters.png';
 import {useEffect, useState, useRef} from 'react';
 
-const MainGame = ({hasStarted}) => {
+const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded}) => {
     const [hour, setHour] = useState(0);
     const [minute, setMinute] = useState(0);
     const [second, setSecond] = useState(0);
@@ -10,6 +10,7 @@ const MainGame = ({hasStarted}) => {
     const [formattedMinute, setFormattedMinute] = useState('00');
     const [formattedSecond, setFormattedSecond] = useState('00');
     let alreadyClicked = useRef([]);
+    //let ended = useRef(false);
 
     const formatTime = () => {
         if ((second+1) % 60 < 10) {
@@ -116,6 +117,11 @@ const MainGame = ({hasStarted}) => {
             if (alreadyClicked.current.length < 5) {
                 mainGame.appendChild(characterMenu);
                 characterMenu.addEventListener('click', (e2) => handleChoiceClick(e, e2));
+            } else {
+                //localHasStarted.current = false;
+                console.log(`it enterred`);
+                setHasStarted(false);
+                setHasEnded(true);
             }
           } else if (potentialCharacterMenu !== null && e.target.id !== '') {
             potentialCharacterMenu.removeEventListener('click', (e2) => handleChoiceClick(e, e2));
@@ -124,11 +130,17 @@ const MainGame = ({hasStarted}) => {
         });
     }, []);
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (hasStarted) {
+            localHasStarted.current = true;
+        }
+    }, [hasStarted]);*/
+
+    useEffect(() => {
+        if (hasStarted && !hasEnded) {
             setTimeout(incrementTime, 1000);
         }
-    }, [hour, minute, second, hasStarted]);
+    }, [hour, minute, second, hasStarted, hasEnded]);
 
     return (
         <div id="main-game" style={{display: 'none'}}>
