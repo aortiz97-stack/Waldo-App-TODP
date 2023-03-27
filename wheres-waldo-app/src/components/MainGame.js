@@ -47,6 +47,7 @@ const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHou
     };
 
     useEffect(() => {
+
         const handleSuccessfulChoiceClickHelper = (name) => {
             let foundMessage = 'Congratulations! You found character!';
             const timer = document.querySelector('#timer');
@@ -135,20 +136,27 @@ const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHou
     });
 
     useEffect(() => {
+        console.log(`effected hasStarted ${hasStarted}`);
+        console.log(`effected hasEnded ${hasEnded}`);
         if (hasStarted && !hasEnded) {
             setTimeout(incrementTime, 1000);
         }
     }, [hour, minute, second, hasStarted, hasEnded]);
 
+
     useEffect(() => {
         console.log(`hasEnded: ${hasEnded}`);
-        if (hasEnded) {
+        if (hasEnded && !hasStarted) {
             const mainGame = document.querySelector('#main-game');
             const scoreBoardMenuContainer = document.querySelector('#scoreboard-menu-container');
             mainGame.style.display = 'none';
             scoreBoardMenuContainer.style.display = 'flex';
+            setHour(0);
+            setMinute(0);
+            setSecond(0);
+            alreadyClicked.current = [];
         }
-    });
+    }, [hasEnded]);
 
     return (
         <div id="main-game" style={{display: 'none'}}>

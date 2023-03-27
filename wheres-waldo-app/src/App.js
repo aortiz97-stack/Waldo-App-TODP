@@ -18,7 +18,7 @@ const App = () => {
     <div id="app-container">
       <HomePage setHasStarted={(e) => setHasStarted(e)} />
       <MainGame hasStarted={hasStarted} setHasStarted={(e) => setHasStarted(e)} hasEnded={hasEnded} setHasEnded={(e) => setHasEnded(e)} setFinalHour={(e)=>setFinalHour(e)} setFinalMinute={(e)=>setFinalMinute(e)} setFinalSecond={(e)=>setFinalSecond(e)} />
-      <ScoreBoardMenu finalHour={finalHour} finalMinute={finalMinute} finalSecond={finalSecond}/>
+      <ScoreBoardMenu finalHour={finalHour} finalMinute={finalMinute} finalSecond={finalSecond} setHasEnded={(e)=>setHasEnded(e)} />
     </div>
   );
 }
