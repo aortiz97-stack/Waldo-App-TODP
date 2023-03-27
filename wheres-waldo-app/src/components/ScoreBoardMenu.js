@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 
-const ScoreBoardMenu = ({finalHour, finalMinute, finalSecond, setHasEnded}) => {
+const ScoreBoardMenu = ({finalHour, finalMinute, finalSecond, setHasEnded, setSecond, setMinute, setHour}) => {
     useEffect(() => {
         const scoreboardMenu = document.querySelector('#scoreboard-menu');
         scoreboardMenu.addEventListener('click', (e) => {
@@ -10,6 +10,9 @@ const ScoreBoardMenu = ({finalHour, finalMinute, finalSecond, setHasEnded}) => {
                 scoreboardMenuContainer.style.display = 'none';
                 homePage.style.display = 'flex';
                 setHasEnded(false);
+                setSecond(0);
+                setMinute(0);
+                setHour(0);
             }
         });
     }, []);

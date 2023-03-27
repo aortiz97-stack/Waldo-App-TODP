@@ -2,10 +2,7 @@ import gobblingGluttons from '../images/gobblinggluttons.jpeg';
 import allCharacters from '../images/all-characters.png';
 import {useEffect, useState, useRef} from 'react';
 
-const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHour, setFinalMinute, setFinalSecond}) => {
-    const [hour, setHour] = useState(0);
-    const [minute, setMinute] = useState(0);
-    const [second, setSecond] = useState(0);
+const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHour, setFinalMinute, setFinalSecond, hour, setHour, minute, setMinute, second, setSecond}) => {
     const [formattedHour, setFormattedHour] = useState('00');
     const [formattedMinute, setFormattedMinute] = useState('00');
     const [formattedSecond, setFormattedSecond] = useState('00');
@@ -151,9 +148,9 @@ const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHou
             const scoreBoardMenuContainer = document.querySelector('#scoreboard-menu-container');
             mainGame.style.display = 'none';
             scoreBoardMenuContainer.style.display = 'flex';
-            setHour(0);
-            setMinute(0);
-            setSecond(0);
+            //setHour(0);
+            //setMinute(0);
+            //setSecond(0);
             alreadyClicked.current = [];
         }
     }, [hasEnded]);
