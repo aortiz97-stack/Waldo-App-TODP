@@ -44,7 +44,7 @@ const App = () => {
       <HomePage setHasStarted={(e) => setHasStarted(e)} />
       <MainGame hasStarted={hasStarted} setHasStarted={(e) => setHasStarted(e)} hasEnded={hasEnded} setHasEnded={(e) => setHasEnded(e)} setFinalHour={(e)=>setFinalHour(e)} setFinalMinute={(e)=>setFinalMinute(e)} setFinalSecond={(e)=>setFinalSecond(e)} hour={hour} setHour={(e)=>setHour(e)} minute={minute} setMinute={e=>setMinute(e)} second={second} setSecond={e=>setSecond(e)} setFormattedSecond={e=>setFormattedSecond(e)} setFormattedMinute={e=>setFormattedMinute(e)} setFormattedHour={e=>setFormattedHour(e)} formattedHour={formattedHour} formattedMinute={formattedMinute} formattedSecond={formattedSecond}/>
       <ScoreBoardMenu finalHour={finalHour} finalMinute={finalMinute} finalSecond={finalSecond} setHasEnded={(e)=>setHasEnded(e)} setHour={e=>setHour(e)} setMinute={e=>setMinute(e)} setSecond={e=>setSecond(e)} setFormattedHour={e=>setFormattedHour(e)} setFormattedMinute={e=>setFormattedMinute(e)} setFormattedSecond={e=>setFormattedSecond(e)} />
-      <ScoreBoard />
+      <ScoreBoard app={app} setSecond={e=>setSecond(e)} setMinute={e=>setMinute(e)} setHour={e => setHour(e)} setFormattedSecond={e=>setFormattedHour(e)} setFormattedMinute={e=>setFormattedMinute(e)} setFormattedHour={e=>setFormattedHour(e)} setHasEnded={e=>setHasEnded(e)}/>
     </div>
   );
 }

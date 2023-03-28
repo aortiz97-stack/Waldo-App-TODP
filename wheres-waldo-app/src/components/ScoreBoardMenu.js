@@ -1,18 +1,14 @@
 import {useEffect, useRef} from 'react';
-import { initializeApp } from "firebase/app";
 import {getFirestore, collection, addDoc, serverTimestamp} from 'firebase/firestore';
 
 const ScoreBoardMenu = ({finalHour, finalMinute, finalSecond, setHasEnded, setSecond, setMinute, setHour, setFormattedHour, setFormattedMinute, setFormattedSecond}) => {
-    const app = useRef(undefined);
     const finalTime = useRef(`${finalHour}:${finalMinute}:${finalSecond}`);
     
     useEffect(()=>{
         finalTime.current = `${finalHour}:${finalMinute}:${finalSecond}`;
     }, [finalHour, finalMinute, finalSecond]);
     useEffect(() => {    
-        // Saves a new message to Cloud Firestore.
         const saveScore = async (userName) => {
-            // Add a new message entry to the Firebase database.
             try {
             await addDoc(collection(getFirestore(), 'scores'), {
                 name: userName,
@@ -35,6 +31,14 @@ const ScoreBoardMenu = ({finalHour, finalMinute, finalSecond, setHasEnded, setSe
                 userNameInput.value = "";
               });
             }
+
+            const scoreBoardMenuContainer = document.querySelector('#scoreboard-menu-container');
+            const scoreBoard = document.querySelector('#scoreboard-container');
+            console.log(`scoreboaaaard ${scoreBoard}`)
+
+            scoreBoard.style.display = 'flex';
+            scoreBoardMenuContainer.style.display = 'none';
+
         };
 
         const scoreboardMenu = document.querySelector('#scoreboard-menu');
@@ -63,7 +67,7 @@ const ScoreBoardMenu = ({finalHour, finalMinute, finalSecond, setHasEnded, setSe
             <div id="scoreboard-menu">
                 <p>Thank you for playing! Add your name to be added to the scoreboard</p>
                 <label htmlFor="username-input"><input id="username-input" /></label>
-                <p> You scored 1st place with a finishing time of {`${finalHour}:${finalMinute}:${finalSecond}`}</p>
+                <p> You had a finishing time of {`${finalHour}:${finalMinute}:${finalSecond}`}</p>
                 <div id="scoreboard-buttons-container">
                     <button type="submit" id="submit-name">Submit</button>
                     <button id="return-to-homepage">Return to HomePage</button>

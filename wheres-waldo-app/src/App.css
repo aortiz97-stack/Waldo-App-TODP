@@ -231,16 +231,19 @@ a:visited {
   background-color: #ff4040;
 }
 
-#scoreboard-menu-container {
+#scoreboard-menu-container, #scoreboard-container {
   background-color: #ff4040;
   height: 100%;
   width: 100%;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#scoreboard-menu {
+#scoreboard-container {
+  overflow: scroll;
+}
+
+#scoreboard-menu, #scoreboard-panel {
   background-color: white;
   height: 50%;
   width: 50%;
@@ -250,6 +253,13 @@ a:visited {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+#scoreboard-panel {
+  height: 100%;
+  border-radius: 0px;
+  padding: 15px;
+  justify-content: flex-start;
 }
 
 #scoreboard-buttons-container {
