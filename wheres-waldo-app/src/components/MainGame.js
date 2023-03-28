@@ -2,10 +2,7 @@ import gobblingGluttons from '../images/gobblinggluttons.jpeg';
 import allCharacters from '../images/all-characters.png';
 import {useEffect, useState, useRef} from 'react';
 
-const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHour, setFinalMinute, setFinalSecond, hour, setHour, minute, setMinute, second, setSecond}) => {
-    const [formattedHour, setFormattedHour] = useState('00');
-    const [formattedMinute, setFormattedMinute] = useState('00');
-    const [formattedSecond, setFormattedSecond] = useState('00');
+const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHour, setFinalMinute, setFinalSecond, hour, setHour, minute, setMinute, second, setSecond, setFormattedSecond, setFormattedMinute, setFormattedHour, formattedHour, formattedMinute, formattedSecond}) => {
     let alreadyClicked = useRef([]);
 
     const formatTime = () => {

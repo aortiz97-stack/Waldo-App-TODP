@@ -59,6 +59,9 @@ const ScoreBoardMenu = ({finalHour, finalMinute, finalSecond, setHasEnded, setSe
                 scoreboardMenuContainer.style.display = 'none';
                 homePage.style.display = 'flex';
                 setHasEnded(false);
+                setFormattedSecond('00');
+                setFormattedMinute('00');
+                setFormattedHour('00');
                 setSecond(0);
                 setMinute(0);
                 setHour(0);
