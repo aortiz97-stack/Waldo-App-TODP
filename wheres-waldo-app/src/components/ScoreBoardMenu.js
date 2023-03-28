@@ -2,7 +2,7 @@ import {useEffect, useRef} from 'react';
 import { initializeApp } from "firebase/app";
 import {getFirestore, collection, addDoc, serverTimestamp} from 'firebase/firestore';
 
-const ScoreBoardMenu = ({finalHour, finalMinute, finalSecond, setHasEnded, setSecond, setMinute, setHour}) => {
+const ScoreBoardMenu = ({finalHour, finalMinute, finalSecond, setHasEnded, setSecond, setMinute, setHour, setFormattedHour, setFormattedMinute, setFormattedSecond}) => {
     const app = useRef(undefined);
     const finalTime = useRef(`${finalHour}:${finalMinute}:${finalSecond}`);
     
