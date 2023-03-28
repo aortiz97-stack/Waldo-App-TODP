@@ -9,20 +9,7 @@ const ScoreBoardMenu = ({finalHour, finalMinute, finalSecond, setHasEnded, setSe
     useEffect(()=>{
         finalTime.current = `${finalHour}:${finalMinute}:${finalSecond}`;
     }, [finalHour, finalMinute, finalSecond]);
-    useEffect(() => {
-        const initiateApp = () => {
-            const firebaseConfig = {
-                apiKey: "AIzaSyDlb_1uZk05Lip9qVd4pMLhAoace1wOekM",
-                authDomain: "where-s-waldo-ab5ff.firebaseapp.com",
-                projectId: "where-s-waldo-ab5ff",
-                storageBucket: "where-s-waldo-ab5ff.appspot.com",
-                messagingSenderId: "132957821806",
-                appId: "1:132957821806:web:47eaf0d1a5b6fc4ab6bf7f",
-                measurementId: "G-YQP00DXRB6"
-            };
-            app.current = initializeApp(firebaseConfig);
-        };
-    
+    useEffect(() => {    
         // Saves a new message to Cloud Firestore.
         const saveScore = async (userName) => {
             // Add a new message entry to the Firebase database.
@@ -50,7 +37,6 @@ const ScoreBoardMenu = ({finalHour, finalMinute, finalSecond, setHasEnded, setSe
             }
         };
 
-        initiateApp();
         const scoreboardMenu = document.querySelector('#scoreboard-menu');
         scoreboardMenu.addEventListener('click', (e) => {
             if (e.target.id === 'return-to-homepage') {

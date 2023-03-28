@@ -3,7 +3,8 @@ import MainGame from './components/MainGame';
 import ScoreBoardMenu from './components/ScoreBoardMenu';
 import ScoreBoard from './components/ScoreBoard';
 import './App.css';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
+import {initializeApp} from 'firebase/app';
 
 const App = () => {
   const [hasStarted, setHasStarted] = useState(false);
@@ -20,6 +21,21 @@ const App = () => {
   const [formattedHour, setFormattedHour] = useState('00');
   const [formattedMinute, setFormattedMinute] = useState('00');
   const [formattedSecond, setFormattedSecond] = useState('00');
+
+  const app = useRef(undefined);
+
+  useEffect(()=>{
+    const firebaseConfig = {
+      apiKey: "AIzaSyDlb_1uZk05Lip9qVd4pMLhAoace1wOekM",
+      authDomain: "where-s-waldo-ab5ff.firebaseapp.com",
+      projectId: "where-s-waldo-ab5ff",
+      storageBucket: "where-s-waldo-ab5ff.appspot.com",
+      messagingSenderId: "132957821806",
+      appId: "1:132957821806:web:47eaf0d1a5b6fc4ab6bf7f",
+      measurementId: "G-YQP00DXRB6"
+    };
+    app.current = initializeApp(firebaseConfig);
+  }, []);
 
 
 
