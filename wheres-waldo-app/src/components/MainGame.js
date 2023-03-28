@@ -107,7 +107,17 @@ const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHou
                 }
             }
             characterMenu.style.left = `${e.clientX}px`;
-            characterMenu.style.top = `${e.clientY}px`;
+            if (e.clientY <= mainGame.clientHeight / 2) {
+                console.log(`client y ${e.clientY}`);
+                console.log(`main game height ${mainGame.clientHeight}`);
+                characterMenu.style.top = `${e.clientY}px`; 
+                console.log(`the height ${characterMenu.style.height}`)
+            } else {
+                characterMenu.style.top = `${e.clientY - mainGame.clientHeight * 0.18}px`; 
+                console.log(`clienty ${e.clientY}`);
+                console.log(`characterMenu height ${characterMenu.clientHeight}`);  
+            } 
+           
             if (alreadyClicked.current.length < 5) {
                 mainGame.appendChild(characterMenu);
                 characterMenu.addEventListener('click', (e2) => handleChoiceClick(e, e2));
