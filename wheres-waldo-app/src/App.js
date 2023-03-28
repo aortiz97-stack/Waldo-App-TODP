@@ -14,7 +14,7 @@ const App = () => {
 
   const [finalHour, setFinalHour] = useState('00');
   const [finalMinute, setFinalMinute] = useState('00');
-  const [finalSecond, setFinalSecond] = useState('00');
+  const [finalSecond, setFinalSecond] = useState('hehe');
 
 
 

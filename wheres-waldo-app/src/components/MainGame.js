@@ -123,18 +123,19 @@ const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHou
     }, []);
 
     useEffect(()=>{
-        if (alreadyClicked.current.length >= 5) {
-            setHasStarted(false);
-            setHasEnded(true);
-            setFinalHour(formattedHour);
-            setFinalMinute(formattedMinute);
-            setFinalSecond(formattedSecond);     
+        if (hasStarted && !hasEnded) {
+            console.log(`tick`);
+            if (alreadyClicked.current.length >= 5) {
+                setHasStarted(false);
+                setHasEnded(true);
+                setFinalHour(formattedHour);
+                setFinalMinute(formattedMinute);
+                setFinalSecond(formattedSecond);     
+            }
         }
     });
 
     useEffect(() => {
-        console.log(`effected hasStarted ${hasStarted}`);
-        console.log(`effected hasEnded ${hasEnded}`);
         if (hasStarted && !hasEnded) {
             setTimeout(incrementTime, 1000);
         }
@@ -142,15 +143,14 @@ const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHou
 
 
     useEffect(() => {
-        console.log(`hasEnded: ${hasEnded}`);
         if (hasEnded && !hasStarted) {
             const mainGame = document.querySelector('#main-game');
             const scoreBoardMenuContainer = document.querySelector('#scoreboard-menu-container');
             mainGame.style.display = 'none';
             scoreBoardMenuContainer.style.display = 'flex';
-            //setHour(0);
-            //setMinute(0);
-            //setSecond(0);
+            setHour(0);
+            setMinute(0);
+            setSecond(0);
             alreadyClicked.current = [];
         }
     }, [hasEnded]);
