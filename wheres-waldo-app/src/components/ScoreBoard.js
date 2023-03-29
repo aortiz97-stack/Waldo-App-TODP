@@ -1,20 +1,12 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {
     getFirestore,
     collection,
-    addDoc,
     query,
     orderBy,
-    limit,
     onSnapshot,
-    setDoc,
-    updateDoc,
-    doc,
-    serverTimestamp,
   } from 'firebase/firestore';
 const ScoreBoard = ({app, setSecond, setMinute, setHour, setFormattedSecond, setFormattedMinute, setFormattedHour, setHasEnded}) => {
-    
-    const [scoresQuery, setScoreQuery] = useState(query(collection(getFirestore(), 'scores'), orderBy('time', 'asc')));
 
     useEffect(()=>{
         const createLiElement = (id, name, time) => {
@@ -25,29 +17,22 @@ const ScoreBoard = ({app, setSecond, setMinute, setHour, setFormattedSecond, set
             return li;
         };
     
-        const displayScore = (id, timeStamp, name, time) => {
+        const displayScore = (id, name, time) => {
             const li = document.getElementById(id) || createLiElement(id, name, time);
             const ol = document.querySelector('ol');
             ol.appendChild(li);
         };
         const loadScores = () => {
-            // Start listening to the query.
+            const scoresQuery = query(collection(getFirestore(), 'scores'), orderBy('time', 'asc'));
             onSnapshot(scoresQuery, (snapshot) => {
               snapshot.docChanges().forEach((change) => {
-                /*if (change.type === 'removed') {
-                  deleteMessage(change.doc.id);
-                } else {*/
-                  //const message = change.doc.data();
-                  const score = change.doc.data();
-                  displayScore(change.doc.id, score.timeStamp, score.name, score.time);
-                  /*displayScore(change.doc.id, message.timestamp, message.name,
-                                message.text, message.profilePicUrl, message.imageUrl);*/
-                //}
+                    const score = change.doc.data();
+                    displayScore(change.doc.id, score.name, score.time);
               });
             });
         };
         loadScores();
-    }, []);
+    });
     
     
     
@@ -68,6 +53,7 @@ const ScoreBoard = ({app, setSecond, setMinute, setHour, setFormattedSecond, set
         setFormattedHour('00');
       });
     }, []);
+
     return(
         <div id="scoreboard-container" style={{display: 'none'}}>
             <div id="scoreboard-panel">

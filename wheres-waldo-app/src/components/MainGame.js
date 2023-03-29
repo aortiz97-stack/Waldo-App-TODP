@@ -1,6 +1,6 @@
 import gobblingGluttons from '../images/gobblinggluttons.jpeg';
 import allCharacters from '../images/all-characters.png';
-import {useEffect, useState, useRef} from 'react';
+import {useEffect, useRef} from 'react';
 
 const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHour, setFinalMinute, setFinalSecond, hour, setHour, minute, setMinute, second, setSecond, setFormattedSecond, setFormattedMinute, setFormattedHour, formattedHour, formattedMinute, formattedSecond}) => {
     let alreadyClicked = useRef([]);
@@ -106,6 +106,7 @@ const MainGame = ({hasStarted, setHasStarted, hasEnded, setHasEnded, setFinalHou
                     characterMenu.appendChild(a);
                 }
             }
+            characterMenu.style.height = `${mainGame.clientHeight * 0.13}px`
             characterMenu.style.left = `${e.clientX}px`;
             if (e.clientY <= mainGame.clientHeight / 2) {
                 console.log(`client y ${e.clientY}`);

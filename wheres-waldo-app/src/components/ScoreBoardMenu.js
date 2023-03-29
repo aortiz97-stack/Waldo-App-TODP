@@ -24,10 +24,8 @@ const ScoreBoardMenu = ({finalHour, finalMinute, finalSecond, setHasEnded, setSe
         const handleSubmit = (e) => {
             e.preventDefault();
             const userNameInput = document.querySelector('#username-input');
-            // Check that the user entered a message and is signed in.
             if (userNameInput.value) {
               saveScore(userNameInput.value).then(() => {
-                // Clear message text field and re-enable the SEND button.
                 userNameInput.value = "";
               });
             }
