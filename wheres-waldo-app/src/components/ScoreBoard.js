@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {
     getFirestore,
     collection,
@@ -13,24 +13,44 @@ import {
     serverTimestamp,
   } from 'firebase/firestore';
 const ScoreBoard = ({app, setSecond, setMinute, setHour, setFormattedSecond, setFormattedMinute, setFormattedHour, setHasEnded}) => {
+    
+    const [scoresQuery, setScoreQuery] = useState(query(collection(getFirestore(), 'scores'), orderBy('time', 'asc')));
 
-    function loadScores() {
-        const scoresQuery = query(collection(getFirestore(), 'scores'), orderBy('time', 'asc'));
-        return scoresQuery;
-        
-        // Start listening to the query.
-        /*onSnapshot(recentMessagesQuery, function(snapshot) {
-          snapshot.docChanges().forEach(function(change) {
-            if (change.type === 'removed') {
-              deleteMessage(change.doc.id);
-            } else {
-              var message = change.doc.data();
-              displayMessage(change.doc.id, message.timestamp, message.name,
-                            message.text, message.profilePicUrl, message.imageUrl);
-            }
-          });
-        });*/
-      }
+    useEffect(()=>{
+        const createLiElement = (id, name, time) => {
+            const li = document.createElement('li');
+            li.key = id;
+            li.id = id;
+            li.innerHTML = `${name} ${time}`;
+            return li;
+        };
+    
+        const displayScore = (id, timeStamp, name, time) => {
+            const li = document.getElementById(id) || createLiElement(id, name, time);
+            const ol = document.querySelector('ol');
+            ol.appendChild(li);
+        };
+        const loadScores = () => {
+            // Start listening to the query.
+            onSnapshot(scoresQuery, (snapshot) => {
+              snapshot.docChanges().forEach((change) => {
+                /*if (change.type === 'removed') {
+                  deleteMessage(change.doc.id);
+                } else {*/
+                  //const message = change.doc.data();
+                  const score = change.doc.data();
+                  displayScore(change.doc.id, score.timeStamp, score.name, score.time);
+                  /*displayScore(change.doc.id, message.timestamp, message.name,
+                                message.text, message.profilePicUrl, message.imageUrl);*/
+                //}
+              });
+            });
+        };
+        loadScores();
+    }, []);
+    
+    
+    
 
     useEffect(()=>{
       const homePage = document.querySelector('#home-page');
@@ -46,15 +66,15 @@ const ScoreBoard = ({app, setSecond, setMinute, setHour, setFormattedSecond, set
         setFormattedSecond('00');
         setFormattedMinute('00');
         setFormattedHour('00');
-
-        console.log(JSON.stringify(loadScores()))
       });
-    }, [])
+    }, []);
     return(
         <div id="scoreboard-container" style={{display: 'none'}}>
             <div id="scoreboard-panel">
                 <h1>ScoreBoard</h1>
-                <div id="scores-displayed"></div>
+                <div id="scores-displayed">
+                    <ol id="scores-list"></ol>
+                </div>
                 <button id="scores-to-home-button">Return to HomePage</button>
             </div>
         </div>

@@ -8,6 +8,8 @@ import {useEffect} from 'react';
 const HomePage = ({setHasStarted}) => {
     useEffect(() => {
         const startButton = document.querySelector('button#start');
+        const scoreBoardButton = document.querySelector('button#scoreboard');
+        const scoreBoard = document.querySelector('#scoreboard-container');
         const homePage = document.querySelector('#home-page');
         const mainGame = document.querySelector('#main-game');
 
@@ -15,6 +17,11 @@ const HomePage = ({setHasStarted}) => {
             homePage.style.display = "none";
             mainGame.style.display = "flex";
             setHasStarted('true');
+        });
+
+        scoreBoardButton.addEventListener('click', () => {
+            scoreBoard.style.display = "flex";
+            homePage.style.display = "none";
         });
     },
     []);
