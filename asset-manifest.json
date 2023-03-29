@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/Waldo-App-TODP/static/css/main.ed444095.css",
+    "main.js": "/Waldo-App-TODP/static/js/main.b96c13d8.js",
+    "static/media/gobblinggluttons.jpeg": "/Waldo-App-TODP/static/media/gobblinggluttons.7694e71b89f6661206be.jpeg",
+    "static/media/waldo.png": "/Waldo-App-TODP/static/media/waldo.9c1c1e52fe9d582baa6b.png",
+    "static/media/wizard-white-beard.png": "/Waldo-App-TODP/static/media/wizard-white-beard.8dbd8d290a91ad038d44.png",
+    "static/media/all-characters.png": "/Waldo-App-TODP/static/media/all-characters.042b592a32bd08d774ed.png",
+    "static/media/Optima-ExtraBlack.otf": "/Waldo-App-TODP/static/media/Optima-ExtraBlack.5e2ac49b9dd02960fd1e.otf",
+    "static/media/odlaw.png": "/Waldo-App-TODP/static/media/odlaw.83043b1a24cd63e41e44.png",
+    "static/media/wenda.png": "/Waldo-App-TODP/static/media/wenda.c090b312794efa62010a.png",
+    "index.html": "/Waldo-App-TODP/index.html",
+    "main.ed444095.css.map": "/Waldo-App-TODP/static/css/main.ed444095.css.map",
+    "main.b96c13d8.js.map": "/Waldo-App-TODP/static/js/main.b96c13d8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ed444095.css",
+    "static/js/main.b96c13d8.js"
+  ]
+}
